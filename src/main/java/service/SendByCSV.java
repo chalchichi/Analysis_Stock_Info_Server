@@ -87,7 +87,7 @@ public class SendByCSV {
 		List<List<String>> ret = new ArrayList<List<String>>();
         BufferedReader br = null;
         try{
-            br = Files.newBufferedReader(Paths.get("C://Users//dhdbs//Desktop//WEB//stock_CSV//"+name.substring(0,name.length()-1)+".csv"));
+            br = Files.newBufferedReader(Paths.get("C://Users//dhdbs//Desktop//WEB//stock_CSV//"+name.substring(0,name.length())+".csv"));
             Charset.forName("UTF-8");
             String line = "";
     

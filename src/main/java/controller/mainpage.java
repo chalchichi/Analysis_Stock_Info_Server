@@ -68,10 +68,12 @@ public class mainpage {
 		return cr.getdata("011160");
 	}
 	
-	@GetMapping(path="/galaxy")
-	public String galaxy()
+	@GetMapping(path="/getorgin")
+	public void galaxy()
 	{
-		return "wow galaxy";
+		csv.SendtoKafka();
+		return;
 	}
+	
 }
 

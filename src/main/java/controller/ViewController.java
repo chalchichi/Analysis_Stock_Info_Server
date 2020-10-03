@@ -33,7 +33,7 @@ public class ViewController {
 		String mainurl ="https://ssl.pstatic.net/imgfinance/chart/item/area/year/"+code+".png?sidcode=1598693784176";
 		modelMap.addAttribute("mainurl", mainurl);
 		modelMap.addAttribute("name"+Integer.toString(0),list.get(0).get(1));
-		String[] index = {"종목명","종목코드","코스피 현재가","전일대비","전일가","시가 ","고가 ","상한가 ","저가 ","하한가","거래량 "};
+		String[] index = {"醫�紐⑸�","醫�紐⑹���","肄��ㅽ�� ���ш�","���쇰��鍮�","���쇨�","��媛� ","怨�媛� ","����媛� ","��媛� ","����媛�","嫄곕���� "};
 		ArrayList<String> na = new ArrayList<>();
 		for(int i=0;i<index.length;i++)
 		{
@@ -59,4 +59,85 @@ public class ViewController {
 		}
 		return "hello";
 	}
+	@RequestMapping("/index")
+	public String index()
+	{
+		return "index";
+	}
+	
+	@RequestMapping("buttons")
+	public String buttons()
+	{
+		return "buttons";
+	}
+	
+	@RequestMapping("/cards")
+	public String cards()
+	{
+		return "cards";
+	}
+	
+	@RequestMapping("/charts")
+	public String charts()
+	{
+		return "charts";
+	}
+	
+	@RequestMapping("/blank")
+	public String blank()
+	{
+		return "blank";
+	}
+	
+	@RequestMapping("/forgot-password")
+	public String forgotpassword()
+	{
+		return "forgot-password";
+	}
+	
+	@RequestMapping("/login")
+	public String login()
+	{
+		return "login";
+	}
+	@RequestMapping("/404")
+	public String error404()
+	{
+		return "404";
+	}
+	@RequestMapping("/register")
+	public String register()
+	{
+		return "register";
+	}
+	@RequestMapping("/tables")
+	public String tables()
+	{
+		return "tables";
+	}
+	
+	@RequestMapping("/utilities-animaiton")
+	public String animaiton()
+	{
+		return "utilities-animaiton";
+	}
+	
+	@RequestMapping("/utilities-border")
+	public String border()
+	{
+		return "utilities-border";
+	}
+	
+	@RequestMapping("/utilities-color")
+	public String color()
+	{
+		return "utilities-color";
+	}
+	
+	@RequestMapping("/utilities-orther")
+	public String orther()
+	{
+		return "utilities-orther";
+	}
+	
 }
