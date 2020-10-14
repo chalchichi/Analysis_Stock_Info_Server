@@ -1,18 +1,18 @@
 package service;
 
 
-import static org.hamcrest.CoreMatchers.nullValue;
 
-import java.io.FileInputStream;
+
+
 import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
+
 import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
+
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
+
 import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

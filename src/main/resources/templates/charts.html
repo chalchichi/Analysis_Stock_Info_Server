@@ -10,7 +10,12 @@
   <meta name="author" content="">
 
   <title>SB Admin 2 - Charts</title>
-
+  <script language="Javascript">
+	function goSurf()  {
+	var urlData = document.getElementById("searchText").value;
+	location.href="charts?name="+urlData;
+	}
+  </script>
   <!-- Custom fonts for this template-->
   <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
   <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
@@ -156,9 +161,9 @@
           <!-- Topbar Search -->
           <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
             <div class="input-group">
-              <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
+              <input type="text" class="form-control bg-light border-0 small" id="searchText" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
               <div class="input-group-append">
-                <button class="btn btn-primary" type="button">
+                <button class="btn btn-primary" type="button" onClick="goSurf()">
                   <i class="fas fa-search fa-sm"></i>
                 </button>
               </div>
@@ -177,7 +182,7 @@
               <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in" aria-labelledby="searchDropdown">
                 <form class="form-inline mr-auto w-100 navbar-search">
                   <div class="input-group">
-                    <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
+                    <input type="text" class="form-control bg-light border-0 small"  placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
                     <div class="input-group-append">
                       <button class="btn btn-primary" type="button">
                         <i class="fas fa-search fa-sm"></i>
@@ -333,27 +338,65 @@
 
           <!-- Page Heading -->
           <h1 class="h3 mb-2 text-gray-800">Charts</h1>
-          <p class="mb-4">Chart.js is a third party plugin that is used to generate the charts in this theme. The charts below have been customized - for further customization options, please visit the <a target="_blank" href="https://www.chartjs.org/docs/latest/">official Chart.js documentation</a>.</p>
+          <p class="mb-4"> 주식 가격의 가장 유사한 흐름(종가 기준) 분석</a>.</p>
 
           <!-- Content Row -->
           <div class="row">
 
             <div class="col-xl-8 col-lg-7">
-
-              <!-- Area Chart -->
+              
               <div class="card shadow mb-4">
                 <div class="card-header py-3">
-                  <h6 class="m-0 font-weight-bold text-primary">Area Chart</h6>
+                  <h6 class="m-0 font-weight-bold text-primary">
+                  	<span th:text="${name0}"></span><br/>
+                  </h6>
                 </div>
                 <div class="card-body">
                   <div class="chart-area">
-                    <canvas id="myAreaChart"></canvas>
+                    <canvas id="myAreaChart" style="height:50vh; width:50vw" ></canvas>
                   </div>
-                  <hr>
-                  Styling for the area chart can be found in the <code>/js/demo/chart-area-demo.js</code> file.
                 </div>
               </div>
-
+              
+              <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                  <h6 class="m-0 font-weight-bold text-primary">
+                  	<span th:text="${name1}"></span><br/>
+                  </h6>
+                </div>
+                <div class="card-body">
+                  <div class="chart-area1">
+                    <canvas id="myAreaChart1" style="height:50vh; width:50vw" ></canvas>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                  <h6 class="m-0 font-weight-bold text-primary">
+                  	<span th:text="${name2}"></span><br/>
+                  </h6>
+                </div>
+                <div class="card-body">
+                  <div class="chart-area2">
+                    <canvas id="myAreaChart2" style="height:50vh; width:50vw" ></canvas>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                  <h6 class="m-0 font-weight-bold text-primary">
+                  	<span th:text="${name3}"></span><br/>
+                  </h6>
+                </div>
+                <div class="card-body">
+                  <div class="chart-area3">
+                    <canvas id="myAreaChart3" style="height:50vh; width:50vw" ></canvas>
+                  </div>
+                </div>
+              </div>
+              
               <!-- Bar Chart -->
               <div class="card shadow mb-4">
                 <div class="card-header py-3">
@@ -438,7 +481,30 @@
   <!-- Bootstrap core JavaScript-->
   <script src="vendor/jquery/jquery.min.js"></script>
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
+  <script type="text/javascript" th:inline="javascript">
+        /*<![CDATA[*/
+        var dataorgin = /*[[ ${data0} ]]*/[];
+        var dateorgin = /*[[ ${date0} ]]*/[];
+        /*]]>*/
+  </script>
+  <script type="text/javascript" th:inline="javascript">
+        /*<![CDATA[*/
+        var data1 = /*[[ ${data1} ]]*/[];
+        var date1 = /*[[ ${date1} ]]*/[];
+        /*]]>*/
+  </script>
+  <script type="text/javascript" th:inline="javascript">
+        /*<![CDATA[*/
+        var data2 = /*[[ ${data2} ]]*/[];
+        var date2 = /*[[ ${date2} ]]*/[];
+        /*]]>*/
+  </script>
+  <script type="text/javascript" th:inline="javascript">
+        /*<![CDATA[*/
+        var data3 = /*[[ ${data3} ]]*/[];
+        var date3 = /*[[ ${date3} ]]*/[];
+        /*]]>*/
+  </script>
   <!-- Core plugin JavaScript-->
   <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
 

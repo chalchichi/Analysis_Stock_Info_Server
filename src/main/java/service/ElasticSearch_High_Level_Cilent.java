@@ -110,6 +110,38 @@ public class ElasticSearch_High_Level_Cilent {
 		return null;
 	}
 	
+	public List<Map<String, Object>> search_code(String name)
+	{
+		//make Result Set
+		List <Map<String, Object>> arrList = new ArrayList<>();
+		
+		//Create Search Request
+		SearchRequest searchRequest = new SearchRequest("stockinfo2"); 
+		SearchSourceBuilder sourceBuilder = new SearchSourceBuilder();
+		sourceBuilder.query(QueryBuilders.termQuery("Name", name));
+		sourceBuilder.sort("Time");
+		sourceBuilder.from(0); 
+		sourceBuilder.size(1); 
+		//Add Builder to Search Request
+		searchRequest.source(sourceBuilder);
+		
+		//Execution(Sync)
+		try {
+			SearchResponse searchResponse = client.search(searchRequest, RequestOptions.DEFAULT);
+			
+			for(SearchHit s:searchResponse.getHits().getHits())
+			  {
+				  Map<String, Object>
+				  sourceMap = s.getSourceAsMap();
+				  arrList.add(sourceMap);
+			  }
+			return arrList;
+		} catch (IOException e) {
+			System.err.println("Elastic search fail");
+		}
+		return null;
+	}
+	
 	public List<Map<String, Object>> search_multi()
 	{
 		//Create Search Request
