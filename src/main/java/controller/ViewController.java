@@ -1,8 +1,11 @@
 package controller;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,6 +15,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import com.mysql.cj.x.protobuf.MysqlxDatatypes.Array;
 
 import service.AnalyzeStock;
 import service.Crawling_Send;
@@ -33,7 +38,7 @@ public class ViewController {
 		String mainurl ="https://ssl.pstatic.net/imgfinance/chart/item/area/year/"+code+".png?sidcode=1598693784176";
 		modelMap.addAttribute("mainurl", mainurl);
 		modelMap.addAttribute("name"+Integer.toString(0),list.get(0).get(1));
-		String[] index = {"醫�紐⑸�","醫�紐⑹���","肄��ㅽ�� ���ш�","���쇰��鍮�","���쇨�","��媛� ","怨�媛� ","����媛� ","��媛� ","����媛�","嫄곕���� "};
+		String[] index = {"종목명","종목코드","코스피 현재가","전일대비","전일가","시가 ","고가 ","상한가 ","저가 ","하한가","거래량 "};
 		ArrayList<String> na = new ArrayList<>();
 		for(int i=0;i<index.length;i++)
 		{
@@ -77,9 +82,32 @@ public class ViewController {
 		return "cards";
 	}
 	
-	@RequestMapping("/charts")
-	public String charts()
-	{
+	@RequestMapping(value = "/charts" , method = RequestMethod.GET)
+	public String charts(@RequestParam(value = "name",defaultValue="삼성전자") String name, Model model) {
+		String code = null;
+		List<Map<String, Object>> temp = elastic.search_code(name);
+		code = (String) temp.get(0).get("Code");
+		List<List<String>> list= al.Getresult(code);
+		for(int i=0;i<4;i++)
+		{
+			List<Map<String, Object>> arr = elastic.search_basic(list.get(i).get(0));
+			ArrayList<Integer> mainprice = new ArrayList<>();
+			ArrayList<String> maindate = new ArrayList<>();
+			for(Map<String, Object> m:arr)
+			{
+				if(m.get("Price").toString().equals("null"))
+				{
+				}
+				else {
+					mainprice.add(Integer.parseInt(m.get("Price").toString()));
+					maindate.add(m.get("Time").toString().substring(0,10));
+				}
+				
+			}
+	  		model.addAttribute("data"+Integer.toString(i), mainprice.toArray());
+	  		model.addAttribute("date"+Integer.toString(i), maindate.toArray());
+	  		model.addAttribute("name"+Integer.toString(i), list.get(i).get(1));
+		}
 		return "charts";
 	}
 	
@@ -116,10 +144,10 @@ public class ViewController {
 		return "tables";
 	}
 	
-	@RequestMapping("/utilities-animaiton")
-	public String animaiton()
+	@RequestMapping("/utilities-animation")
+	public String animation()
 	{
-		return "utilities-animaiton";
+		return "utilities-animation";
 	}
 	
 	@RequestMapping("/utilities-border")
@@ -134,10 +162,10 @@ public class ViewController {
 		return "utilities-color";
 	}
 	
-	@RequestMapping("/utilities-orther")
+	@RequestMapping("/utilities-other")
 	public String orther()
 	{
-		return "utilities-orther";
+		return "utilities-other";
 	}
 	
 }
